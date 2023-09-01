@@ -1,0 +1,36 @@
+doctype html
+head
+  title= "Search " + pageTitle
+
+body
+    h1= "Search " + pageTitle
+    h2 Search Crawled Pages
+    form
+        fieldset
+            label(for="q") Search Query: 
+            input(type="text" name="q" id="q")
+            br
+            label(for="boost") PageRank Boost:
+            input(type="checkbox" name="boost" id="boost" value="true")
+            br
+            label(for="limit") How many results: 
+            input(type="number" min=1 max=50 name="limit" id="limit")
+            br
+            button(type="submit") Search
+
+    ol
+        each page in relevantPages
+            li
+                h3 Original Page Title: #{page.title} 
+                p
+                    strong Search Score: 
+                    span= page.searchScore
+                p
+                    strong Page Rank: 
+                    span= page.pageRank
+                p
+                    a(href="/pages/" + page._id) Link to Extracted Page (#{page._id})
+                p
+                    a(href=page.uri) Link to Original Page
+            hr
+

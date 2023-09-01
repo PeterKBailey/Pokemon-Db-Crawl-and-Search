@@ -1,0 +1,45 @@
+doctype html
+head
+  title= "Extracted " + page.title
+
+body
+    h1= "Extracted Page For "
+        br
+        a(href=page.uri)= page.title
+    h2 Page Rank: #{page.pageRank}
+    h2 Word Frequencies 
+    ul(style="max-height:300px; overflow:scroll;")
+        each freq, word in page.wordFreqs 
+            li
+                strong #{word}
+                span :  #{freq}
+    hr
+
+    h2 #{pagesToCurrentPage.length} Incoming links (links to this page)
+    ul(style="max-height:300px; overflow:scroll;")
+        each page in pagesToCurrentPage
+            li
+                h3= page.title
+                a(href=page.uri) Original Page
+                br
+                br
+                a(href="./" + page._id) Extracted Page (#{page._id})
+                hr
+    hr
+
+    h2 #{pagesFromCurrentPage.length} Outgoing links (links from this page)
+    ul(style="max-height:300px; overflow:scroll;")
+        each page in pagesFromCurrentPage
+            li
+                if page._id
+                    h3= page.title
+                    a(href=page.uri) Original Page
+                    br
+                    br
+                    a(href="./" + page._id) Extracted Page (#{page._id})
+                else 
+                    h3 Uncrawled Page
+                    a(href=page.uri) Original Page: (#{page.uri})
+
+                hr
+

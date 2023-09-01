@@ -1,0 +1,12 @@
+doctype html
+head
+  title= "Popular"
+
+body
+    h1= "Popular"
+    ol
+        each page in popularPages
+            li
+                strong= page.uri + " (" + page.count + ")"
+            hr
+
